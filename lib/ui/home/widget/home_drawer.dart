@@ -160,9 +160,17 @@ class _HomeDrawerState extends State<HomeDrawer> {
                           setState(() {
                             selectedTheme = value!;
                             if(themeProvider.currentTheme==ThemeMode.dark){
-                              themeProvider.changeTheme(ThemeMode.light);
+                              if(value==StringsManger.theme1.tr()){
+                                themeProvider.changeTheme(ThemeMode.light);
+                              }else{
+                                themeProvider.changeTheme(ThemeMode.dark);
+                              };
                             }else{
-                              themeProvider.changeTheme(ThemeMode.dark);
+                              if(value==StringsManger.theme2.tr()){
+                                themeProvider.changeTheme(ThemeMode.dark);
+                              }else{
+                                themeProvider.changeTheme(ThemeMode.light);
+                              }
                             }
                           });
                         }),
@@ -240,9 +248,17 @@ class _HomeDrawerState extends State<HomeDrawer> {
                           setState(() {
                             selectedLang = value!;
                             if(context.locale.languageCode=="ar"){
-                              context.setLocale(Locale("en"));
+                              if(value==StringsManger.language1){
+                                context.setLocale(Locale("en"));
+                              }else{
+                                context.setLocale(Locale("ar"));
+                              }
                             }else{
-                              context.setLocale(Locale("ar"));
+                              if(value==StringsManger.language2){
+                                context.setLocale(Locale("ar"));
+                              }else{
+                                context.setLocale(Locale("en"));
+                              }
                             }
                           });
                         }),
