@@ -12,7 +12,6 @@ class ThemeProvider extends ChangeNotifier {
       currentTheme = ThemeMode.light;
     }
   }
-
   changeTheme(ThemeMode newTheme) {
     currentTheme = newTheme;
     if (currentTheme == ThemeMode.dark) {
