@@ -15,5 +15,7 @@
   "science": "علم",
   "technology": "تكنولوجيا",
   "entertainment": "ترفيه",
-  "view_all_article": "عرض المقال كامل"
+  "view_all_article": "عرض المقال كامل",
+  "try_again": "إعادة المحاولة",
+  "no_articles_found": "لا توجد مقالات"
 }

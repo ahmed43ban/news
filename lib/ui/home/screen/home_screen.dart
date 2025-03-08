@@ -21,12 +21,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   bool isShowNewsList=false;
   CategoryModel? selectedCategory;
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-    ApiManger.getSources("general",context.locale.languageCode);
-  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Theme.of(context).colorScheme.primary, BlendMode.srcIn),))
         ],
       ),
-      body: isShowNewsList?NewsList():CategoriesWidget(onCategoryTap: onCategorySelected,)
+      body: isShowNewsList?NewsList(category:selectedCategory! ,):CategoriesWidget(onCategoryTap: onCategorySelected,)
     );
   }
 
