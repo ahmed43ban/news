@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news/core/remote/ApiManger.dart';
 import 'package:news/core/strings_manger.dart';
 import 'package:news/model/CategoryModel.dart';
 import 'package:news/ui/newslist/screen/news_list_view_model.dart';
@@ -22,7 +21,7 @@ class _NewsListState extends State<NewsList> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create:(context) => NewsListViewModel()..getSources(widget.category.id, context.locale.languageCode),
+        create:(_NewsListState) => NewsListViewModel()..getSources(widget.category.id, context.locale.languageCode),
       child: Consumer<NewsListViewModel>(
           builder: (context, viewModel, child) {
             if(viewModel.showLoading){

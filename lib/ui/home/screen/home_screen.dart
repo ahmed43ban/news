@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Theme.of(context).colorScheme.primary, BlendMode.srcIn),))
         ],
       ),
-      body: isShowNewsList?NewsList(category:selectedCategory! ,):CategoriesWidget(onCategoryTap: onCategorySelected,)
+      body: isShowNewsList?NewsList(category:selectedCategory!,):CategoriesWidget(onCategoryTap: onCategorySelected,)
     );
   }
 
