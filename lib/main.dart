@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'core/app_style.dart';
 import 'core/prefshelper.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PrefHelper.init();
   await EasyLocalization.ensureInitialized();
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
     return ScreenUtilInit(
-      designSize:const Size(393,852),
+      designSize: const Size(393, 852),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
@@ -41,10 +41,10 @@ class MyApp extends StatelessWidget {
           title: 'News App',
           theme: AppStyle.lightTheme,
           darkTheme: AppStyle.darkTheme,
-          themeMode:  themeProvider.currentTheme,
+          themeMode: themeProvider.currentTheme,
           debugShowCheckedModeBanner: false,
           routes: {
-            HomeScreen.routeName:(_)=>HomeScreen(),
+            HomeScreen.routeName: (_) => HomeScreen(),
           },
           initialRoute: HomeScreen.routeName,
         );
@@ -52,4 +52,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

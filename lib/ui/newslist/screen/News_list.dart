@@ -10,61 +10,78 @@ import '../widget/ArticlesList.dart';
 
 class NewsList extends StatefulWidget {
   CategoryModel category;
-   NewsList({required this.category});
+
+  NewsList({required this.category});
 
   @override
   State<NewsList> createState() => _NewsListState();
 }
 
 class _NewsListState extends State<NewsList> {
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create:(_NewsListState) => NewsListViewModel()..getSources(widget.category.id, context.locale.languageCode),
+      create: (_NewsListState) => NewsListViewModel()
+        ..getSources(widget.category.id, context.locale.languageCode),
       child: Consumer<NewsListViewModel>(
-          builder: (context, viewModel, child) {
-            if(viewModel.showLoading){
-              return Center(child: CircularProgressIndicator(),);
-          }else if(viewModel.errorMessage!=null){
-              return Column(
-                children: [
-                  Text(viewModel.errorMessage!),
-                  ElevatedButton(onPressed: (){
-                    setState(() {
-
-                    });
-                  }, child: Text(StringsManger.try_again.tr(),style: Theme.of(context).textTheme.titleMedium,))
-                ],);
-            }
-            return DefaultTabController(
-              length: viewModel.sources.length,
-              child: Padding(
-                padding: REdgeInsetsDirectional.only(
-                    top: 16,
-                    end: 16,
-                    start: 16
-                ),
-                child: Column(
-                  children: [
-                    TabBar(
-                        unselectedLabelStyle: Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: 14.sp),
-                        labelStyle: Theme.of(context).textTheme.labelMedium,
-                        labelColor: Theme.of(context).colorScheme.primary,
-                        indicatorColor: Theme.of(context).colorScheme.primary,
-                        dividerHeight: 0,
-                        tabAlignment: TabAlignment.start,
-                        isScrollable: true,
-                        tabs:viewModel.sources.map((source)=>Tab(text: source.name,)).toList()
-                    ),
-                    SizedBox(height: 15.h,),
-                    Expanded(child: TabBarView(
-                        children: viewModel.sources.map((source)=>ArticlesList(source: source,)).toList()
-                    ))
-                  ],
-                ),
-              ),
+        builder: (context, viewModel, child) {
+          if (viewModel.showLoading) {
+            return Center(
+              child: CircularProgressIndicator(),
             );
-          },),);
+          } else if (viewModel.errorMessage != null) {
+            return Column(
+              children: [
+                Text(viewModel.errorMessage!),
+                ElevatedButton(
+                    onPressed: () {
+                      setState(() {});
+                    },
+                    child: Text(
+                      StringsManger.try_again.tr(),
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ))
+              ],
+            );
+          }
+          return DefaultTabController(
+            length: viewModel.sources.length,
+            child: Padding(
+              padding: REdgeInsetsDirectional.only(top: 16, end: 16, start: 16),
+              child: Column(
+                children: [
+                  TabBar(
+                      unselectedLabelStyle: Theme.of(context)
+                          .textTheme
+                          .titleSmall
+                          ?.copyWith(fontSize: 14.sp),
+                      labelStyle: Theme.of(context).textTheme.labelMedium,
+                      labelColor: Theme.of(context).colorScheme.primary,
+                      indicatorColor: Theme.of(context).colorScheme.primary,
+                      dividerHeight: 0,
+                      tabAlignment: TabAlignment.start,
+                      isScrollable: true,
+                      tabs: viewModel.sources
+                          .map((source) => Tab(
+                                text: source.name,
+                              ))
+                          .toList()),
+                  SizedBox(
+                    height: 15.h,
+                  ),
+                  Expanded(
+                      child: TabBarView(
+                          children: viewModel.sources
+                              .map((source) => ArticlesList(
+                                    source: source,
+                                  ))
+                              .toList()))
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
   }
 }
