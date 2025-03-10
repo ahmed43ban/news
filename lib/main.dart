@@ -47,9 +47,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           routes: {
             HomeScreen.routeName: (_) => HomeScreen(),
-            SearchScreen.routeName:(_)=>ChangeNotifierProvider(
-              create: (context) => SearchViewModel(),
-                child: SearchScreen())
+            SearchScreen.routeName: (_) => ChangeNotifierProvider(
+                create: (context) => SearchViewModel(), child: SearchScreen())
           },
           initialRoute: HomeScreen.routeName,
         );

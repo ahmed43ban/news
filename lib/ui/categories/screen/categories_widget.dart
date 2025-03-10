@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
-
 import '../../../core/assets_manger.dart';
 import '../../../core/strings_manger.dart';
 import '../../../model/CategoryModel.dart';

@@ -21,4 +21,5 @@ abstract class StringsManger {
   static const String try_again = "try_again";
   static const String no_articles_found = "no_articles_found";
   static const String search = "search";
+  static const String wait_search = "wait_search";
 }
