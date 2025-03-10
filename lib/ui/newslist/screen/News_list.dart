@@ -21,7 +21,7 @@ class _NewsListState extends State<NewsList> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_NewsListState) => NewsListViewModel()
+      create: (_) => NewsListViewModel()
         ..getSources(widget.category.id, context.locale.languageCode),
       child: Consumer<NewsListViewModel>(
         builder: (context, viewModel, child) {
