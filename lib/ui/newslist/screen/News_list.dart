@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/core/remote/ApiManger.dart';
 import 'package:news/core/strings_manger.dart';
 import 'package:news/model/CategoryModel.dart';
+import 'package:news/ui/newslist/screen/news_list_view_model.dart';
+import 'package:provider/provider.dart';
 
 import '../widget/ArticlesList.dart';
 
@@ -16,41 +18,30 @@ class NewsList extends StatefulWidget {
 }
 
 class _NewsListState extends State<NewsList> {
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: ApiManger.getSources(widget.category.id, context.locale.languageCode),
-        builder:(context, snapshot) {
-          if(snapshot.connectionState==ConnectionState.waiting){
-            return Center(child: CircularProgressIndicator(),);
-          }else if(snapshot.hasError){
-            return Column(
-              children: [
-                Text(snapshot.error.toString()),
-                ElevatedButton(onPressed: (){
-                  setState(() {
+    return ChangeNotifierProvider(
+        create:(context) => NewsListViewModel()..getSources(widget.category.id, context.locale.languageCode),
+      child: Consumer<NewsListViewModel>(
+          builder: (context, viewModel, child) {
+            if(viewModel.showLoading){
+              return Center(child: CircularProgressIndicator(),);
+          }else if(viewModel.errorMessage!=null){
+              return Column(
+                children: [
+                  Text(viewModel.errorMessage!),
+                  ElevatedButton(onPressed: (){
+                    setState(() {
 
-                  });
-                }, child: Text(StringsManger.try_again.tr(),style: Theme.of(context).textTheme.titleMedium,))
-              ],);
-          }
-          var response =snapshot.data;
-          if(response?.status=="error"){
-            return Column(
-              children: [
-                Text(response?.message??""),
-                ElevatedButton(onPressed: (){
-                  setState(() {
-
-                  });
-                }, child: Text(StringsManger.try_again.tr(),style: Theme.of(context).textTheme.titleMedium,))
-              ],);
-          }
-          var sources=response?.sources??[];
-          return DefaultTabController(
-              length: sources.length,
+                    });
+                  }, child: Text(StringsManger.try_again.tr(),style: Theme.of(context).textTheme.titleMedium,))
+                ],);
+            }
+            return DefaultTabController(
+              length: viewModel.sources.length,
               child: Padding(
-                padding: EdgeInsetsDirectional.only(
+                padding: REdgeInsetsDirectional.only(
                     top: 16,
                     end: 16,
                     start: 16
@@ -65,17 +56,16 @@ class _NewsListState extends State<NewsList> {
                         dividerHeight: 0,
                         tabAlignment: TabAlignment.start,
                         isScrollable: true,
-                        tabs:sources.map((source)=>Tab(text: source.name,)).toList()
+                        tabs:viewModel.sources.map((source)=>Tab(text: source.name,)).toList()
                     ),
                     SizedBox(height: 15.h,),
                     Expanded(child: TabBarView(
-                        children: sources.map((source)=>ArticlesList(source: source,)).toList()
+                        children: viewModel.sources.map((source)=>ArticlesList(source: source,)).toList()
                     ))
                   ],
                 ),
               ),
             );
-
-        }, );
+          },),);
   }
 }
