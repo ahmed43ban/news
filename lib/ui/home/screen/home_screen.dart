@@ -7,6 +7,7 @@ import 'package:news/core/remote/ApiManger.dart';
 import 'package:news/core/strings_manger.dart';
 import 'package:news/model/CategoryModel.dart';
 import 'package:news/ui/newslist/screen/News_list.dart';
+import 'package:news/ui/search/screen/search_screen.dart';
 
 import '../../categories/screen/categories_widget.dart';
 import '../widget/home_drawer.dart';
@@ -29,7 +30,9 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text(selectedCategory!=null?selectedCategory!.title:StringsManger.home.tr()),
         actions: [
-          IconButton(onPressed: (){},
+          IconButton(onPressed: (){
+            Navigator.pushNamed(context, SearchScreen.routeName);
+          },
               icon: SvgPicture.asset(AssetsManger.search,height: 24.h,width: 24.w,
                 colorFilter: ColorFilter.mode(
                     Theme.of(context).colorScheme.primary, BlendMode.srcIn),))

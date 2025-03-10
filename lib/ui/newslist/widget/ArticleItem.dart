@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/core/strings_manger.dart';
 import 'package:news/model/ArticlesResponse/Article.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:url_launcher/url_launcher.dart';
 class ArticleItem extends StatelessWidget {
   final Article article;
   const ArticleItem({super.key,required this.article});
@@ -41,7 +42,10 @@ class ArticleItem extends StatelessWidget {
                     fontWeight: FontWeight.w500
                   ) ,maxLines: 4,overflow: TextOverflow.ellipsis,),
                 SizedBox(height: 8,),
-                ElevatedButton(onPressed: (){},
+                ElevatedButton(onPressed: (){
+                  launchUrl(Uri.parse(article.url??""),
+                      mode: LaunchMode.inAppBrowserView);
+                },
                     style: ElevatedButton.styleFrom(
                       padding: REdgeInsets.all(16),
                         backgroundColor: Theme.of(context).colorScheme.secondary),

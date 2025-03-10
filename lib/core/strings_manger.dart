@@ -20,4 +20,5 @@ abstract class StringsManger {
   static const String view_all_article = "view_all_article";
   static const String try_again = "try_again";
   static const String no_articles_found = "no_articles_found";
+  static const String search = "search";
 }

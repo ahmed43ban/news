@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/providers/theme_provider.dart';
 import 'package:news/ui/home/screen/home_screen.dart';
+import 'package:news/ui/search/screen/search_screen.dart';
+import 'package:news/ui/search/widget/search_view_model.dart';
 import 'package:provider/provider.dart';
 
 import 'core/app_style.dart';
@@ -45,6 +47,9 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           routes: {
             HomeScreen.routeName: (_) => HomeScreen(),
+            SearchScreen.routeName:(_)=>ChangeNotifierProvider(
+              create: (context) => SearchViewModel(),
+                child: SearchScreen())
           },
           initialRoute: HomeScreen.routeName,
         );
