@@ -24,18 +24,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: HomeDrawer(onHomeTap: onHomeTap,),
-      appBar: AppBar(
-        title: Text(selectedCategory!=null?selectedCategory!.title:StringsManger.home.tr()),
-        actions: [
-          IconButton(onPressed: (){},
-              icon: SvgPicture.asset(AssetsManger.search,height: 24.h,width: 24.w,
-                colorFilter: ColorFilter.mode(
-                    Theme.of(context).colorScheme.primary, BlendMode.srcIn),))
-        ],
+    return SafeArea(
+      child: Scaffold(
+        drawer: HomeDrawer(onHomeTap: onHomeTap,),
+        appBar: AppBar(
+          title: Text(selectedCategory!=null?selectedCategory!.title:StringsManger.home.tr()),
+          actions: [
+            IconButton(onPressed: (){},
+                icon: SvgPicture.asset(AssetsManger.search,height: 24.h,width: 24.w,
+                  colorFilter: ColorFilter.mode(
+                      Theme.of(context).colorScheme.primary, BlendMode.srcIn),))
+          ],
+        ),
+        body: isShowNewsList?NewsList(category:selectedCategory! ,):CategoriesWidget(onCategoryTap: onCategorySelected,)
       ),
-      body: isShowNewsList?NewsList(category:selectedCategory! ,):CategoriesWidget(onCategoryTap: onCategorySelected,)
     );
   }
 
