@@ -31,7 +31,10 @@ class _ArticlesListState extends State<ArticlesList> {
           } else if (viewModel.errorMessage != null) {
             return Column(
               children: [
-                Text(viewModel.errorMessage!,style: Theme.of(context).textTheme.titleMedium,),
+                Text(
+                  viewModel.errorMessage!,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 ElevatedButton(
                     onPressed: () {
                       setState(() {});

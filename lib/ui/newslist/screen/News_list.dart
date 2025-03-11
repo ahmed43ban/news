@@ -32,7 +32,10 @@ class _NewsListState extends State<NewsList> {
           } else if (viewModel.errorMessage != null) {
             return Column(
               children: [
-                Text(viewModel.errorMessage!,style: Theme.of(context).textTheme.titleMedium,),
+                Text(
+                  viewModel.errorMessage!,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 ElevatedButton(
                     onPressed: () {
                       setState(() {});
