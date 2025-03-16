@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:news/core/assets_manger.dart';
-import 'package:news/core/remote/ApiManger.dart';
 import 'package:news/core/strings_manger.dart';
-import 'package:news/model/CategoryModel.dart';
 import 'package:news/ui/newslist/screen/News_list.dart';
 
+import '../../../data/model/CategoryModel.dart';
 import '../../categories/screen/categories_widget.dart';
 import '../widget/home_drawer.dart';
 

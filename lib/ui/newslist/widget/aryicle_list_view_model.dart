@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/core/remote/ApiManger.dart';
-import 'package:news/model/ArticlesResponse/Article.dart';
+import '../../../data/model/ArticlesResponse/Article.dart';
 
 class ArticlesListViewModel extends Cubit<ArticlesState>{
   ArticlesListViewModel():super(ArticleLoadingState());

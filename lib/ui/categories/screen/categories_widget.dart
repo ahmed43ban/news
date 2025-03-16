@@ -5,7 +5,7 @@ import 'package:news/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 import '../../../core/assets_manger.dart';
 import '../../../core/strings_manger.dart';
-import '../../../model/CategoryModel.dart';
+import '../../../data/model/CategoryModel.dart';
 import '../widget/categories_item.dart';
 import 'dart:ui' as myText;
 

@@ -2,12 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news/core/remote/ApiManger.dart';
-import 'package:news/model/sourcesResponse/Source.dart';
 import 'package:news/ui/newslist/widget/ArticleItem.dart';
 import 'package:news/ui/newslist/widget/aryicle_list_view_model.dart';
 
 import '../../../core/strings_manger.dart';
+import '../../../data/model/sourcesResponse/Source.dart';
 
 class ArticlesList extends StatefulWidget{
   Source source;

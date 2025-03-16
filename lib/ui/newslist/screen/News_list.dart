@@ -2,11 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:news/core/remote/ApiManger.dart';
 import 'package:news/core/strings_manger.dart';
-import 'package:news/model/CategoryModel.dart';
 import 'package:news/ui/newslist/screen/news_list_view_model.dart';
-
+import '../../../data/model/CategoryModel.dart';
 import '../widget/ArticlesList.dart';
 
 class NewsList extends StatefulWidget {

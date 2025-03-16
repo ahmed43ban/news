@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/core/strings_manger.dart';
-import 'package:news/model/CategoryModel.dart';
+import '../../../data/model/CategoryModel.dart';
 
 class CategoriesItem extends StatelessWidget {
   CategoryModel categoryModel;
