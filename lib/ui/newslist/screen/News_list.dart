@@ -2,7 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:news/core/remote/ApiManger.dart';
 import 'package:news/core/strings_manger.dart';
+import 'package:news/data/data_source_impl/sources_api_data_source_impl.dart';
+import 'package:news/data/repo_impl/sources_repo_impl.dart';
 import 'package:news/ui/newslist/screen/news_list_view_model.dart';
 import '../../../data/model/CategoryModel.dart';
 import '../widget/ArticlesList.dart';
@@ -19,7 +22,12 @@ class _NewsListState extends State<NewsList> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (_) => NewsListViewModel()..getSources(widget.category.id, context.locale.languageCode),
+        create: (_) => NewsListViewModel(
+            SourcesRepoImpl(
+                SourcesApiDataSourceImpl(ApiManger()
+                )
+            )
+        )..getSources(widget.category.id, context.locale.languageCode),
       child: BlocBuilder<NewsListViewModel,NewsStates>(builder: (context, state) {
         if(state is NewsLoadingState){
           return Center(child: CircularProgressIndicator(),);

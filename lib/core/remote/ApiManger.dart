@@ -6,7 +6,7 @@ import '../../data/model/ArticlesResponse/ArticlesResponse.dart';
 import '../../data/model/sourcesResponse/SourcesResponse.dart';
 
 class ApiManger{
-  Future<SourcesResponse?> getSources(String category,String langCode)async{
+  Future<SourcesResponse> getSources(String category,String langCode)async{
     Uri uri = Uri.https(baseUrl,"v2/top-headlines/sources",{
       "apiKey":apiKey,
       "category":category,

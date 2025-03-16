@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/ui/newslist/widget/ArticleItem.dart';
-import 'package:news/ui/newslist/widget/aryicle_list_view_model.dart';
+import 'package:news/ui/newslist/widget/article_list_view_model.dart';
 
 import '../../../core/strings_manger.dart';
 import '../../../data/model/sourcesResponse/Source.dart';
