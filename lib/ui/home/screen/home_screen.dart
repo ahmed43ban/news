@@ -31,7 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           title: Text(selectedCategory!=null?selectedCategory!.title:StringsManger.home.tr()),
           actions: [
-            IconButton(onPressed: (){},
+            IconButton(onPressed: (){
+              Navigator.pushNamed(context, SearchScreen.routeName);
+            },
                 icon: SvgPicture.asset(AssetsManger.search,height: 24.h,width: 24.w,
                   colorFilter: ColorFilter.mode(
                       Theme.of(context).colorScheme.primary, BlendMode.srcIn),))
