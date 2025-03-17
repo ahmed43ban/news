@@ -2,8 +2,9 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:news/core/remote/ApiConstants.dart';
-import 'package:news/model/ArticlesResponse/ArticlesResponse.dart';
-import 'package:news/model/sourcesResponse/SourcesResponse.dart';
+
+import '../../data/model/ArticlesResponse/ArticlesResponse.dart';
+import '../../data/model/sourcesResponse/SourcesResponse.dart';
 
 class ApiManger {
   static Future<SourcesResponse?> getSources(

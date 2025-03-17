@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:news/model/ArticlesResponse/Article.dart';
 
 import '../../../core/remote/ApiManger.dart';
+import '../../../data/model/ArticlesResponse/Article.dart';
 
 class ArticlesViewModel extends ChangeNotifier {
   List<Article> articles = [];

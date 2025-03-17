@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/remote/ApiManger.dart';
-import '../../../model/ArticlesResponse/Article.dart';
+import '../../../data/model/ArticlesResponse/Article.dart';
 
 class SearchViewModel extends ChangeNotifier {
   List<Article> articles = [];

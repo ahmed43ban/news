@@ -1,6 +1,6 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/core/remote/ApiManger.dart';
 import '../../../data/model/sourcesResponse/Source.dart';
-import 'package:news/model/sourcesResponse/Source.dart';
 
 class NewsListViewModel extends Cubit<NewsStates>{
   NewsListViewModel():super(NewsLoadingState());
