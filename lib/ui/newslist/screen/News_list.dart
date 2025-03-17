@@ -9,7 +9,8 @@ import '../widget/ArticlesList.dart';
 
 class NewsList extends StatefulWidget {
   CategoryModel category;
-   NewsList({required this.category});
+
+  NewsList({required this.category});
 
   @override
   State<NewsList> createState() => _NewsListState();
