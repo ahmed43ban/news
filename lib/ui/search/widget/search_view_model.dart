@@ -11,7 +11,7 @@ class SearchViewModel extends ChangeNotifier {
   getArticles(String text) async {
     try {
       showLoading = true;
-      var response = await ApiManger.searchWay(text);
+      var response = await ApiManger().searchWay(text);
       if (response.status == "error") {
         errorMessage = response.message;
       } else {

@@ -11,7 +11,7 @@ class ArticlesViewModel extends ChangeNotifier {
   getArticles(String source) async {
     try {
       showLoading = true;
-      var response = await ApiManger.getArticle(source);
+      var response = await ApiManger().getArticle(source);
       if (response.status == "error") {
         errorMessage = response.message;
       } else {
