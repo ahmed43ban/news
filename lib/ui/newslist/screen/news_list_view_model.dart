@@ -1,26 +1,35 @@
-import 'package:flutter/material.dart';
 import 'package:news/core/remote/ApiManger.dart';
+import '../../../data/model/sourcesResponse/Source.dart';
 import 'package:news/model/sourcesResponse/Source.dart';
 
-class NewsListViewModel extends ChangeNotifier {
-  List<Source> sources = [];
-  String? errorMessage;
-  bool showLoading = false;
+class NewsListViewModel extends Cubit<NewsStates>{
+  NewsListViewModel():super(NewsLoadingState());
 
-  getSources(String categoryId, String lang) async {
-    try {
-      showLoading = true;
-      var response = await ApiManger.getSources(categoryId, lang);
-      if (response?.status == "error") {
-        errorMessage = response?.message;
-      } else {
-        sources = response?.sources ?? [];
+  getSources(String category , String langCode)async{
+    try{
+      emit(NewsLoadingState());
+      var response=await ApiManger.getSources(category, langCode);
+
+      if(response?.status=="error"){
+        emit(NewsErrorState(errorMessage: response!.message!));
+      }else {
+        emit(NewsSuccessState(sources: response?.sources??[]));
       }
-      showLoading = false;
-    } catch (e) {
-      errorMessage = e.toString();
-      showLoading = false;
+    }catch(e){
+      emit(NewsErrorState(errorMessage:e.toString()));
     }
-    notifyListeners();
   }
+
+}
+
+
+abstract class NewsStates{}
+class NewsLoadingState extends NewsStates{}
+class NewsErrorState extends NewsStates{
+  String errorMessage;
+  NewsErrorState({required this.errorMessage});
+}
+class NewsSuccessState extends NewsStates{
+  List<Source>sources;
+  NewsSuccessState({required this.sources});
 }
