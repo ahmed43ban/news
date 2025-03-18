@@ -31,7 +31,7 @@ class ApiManger{
   Future<ArticlesResponse> searchWay(String text)async{
     //https://newsapi.org/v2/everything?q=mass&apiKey=7f1cc15c543a4f8cbebb811ef8787e28&pageSize=20
     Uri url = Uri.https(
-        baseUrl, "v2/everything", {"apikey": apiKey, "q": text});
+        baseUrl, "v2/everything", {"apikey": apiKey, "q": text,"pageSize":20.toString()});
     var response = await http.get(url);
     Map<String,dynamic>json= jsonDecode(response.body);
     ArticlesResponse articlesResponse = ArticlesResponse.fromJson(json);

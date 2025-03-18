@@ -8,7 +8,7 @@ class SearchViewModel extends ChangeNotifier {
   String? errorMessage;
   bool showLoading = false;
 
-  getArticles(String text) async {
+  getArticles(String text,) async {
     try {
       showLoading = true;
       var response = await ApiManger().searchWay(text);

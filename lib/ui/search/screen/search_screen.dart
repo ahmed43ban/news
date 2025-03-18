@@ -6,6 +6,7 @@ import 'package:news/ui/home/screen/home_screen.dart';
 import 'package:news/ui/search/widget/search_view_model.dart';
 import 'package:provider/provider.dart';
 
+import '../../../core/compontes/EmptyNotficationsScreen.dart';
 import '../../newslist/widget/ArticleItem.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -20,6 +21,8 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   TextEditingController controller = TextEditingController();
   SearchViewModel? viewModel;
+
+
 
   @override
   void initState() {
@@ -99,69 +102,69 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               controller.text.isEmpty
                   ? SliverToBoxAdapter(
-                      child: Center(
-                        child: Text(StringsManger.wait_search.tr(),
-                            style: Theme.of(context).textTheme.titleMedium),
-                      ),
-                    )
+                child: Center(
+                  child: Text(StringsManger.wait_search.tr(),
+                      style: Theme.of(context).textTheme.titleMedium),
+                ),
+              )
                   : Consumer<SearchViewModel>(
-                      builder: (context, viewModel, child) {
-                        if (viewModel.showLoading) {
-                          return SliverFillRemaining(
-                            child: Center(
-                              child: CircularProgressIndicator(),
+                builder: (context, viewModel, child) {
+                  if (viewModel.showLoading) {
+                    return SliverFillRemaining(
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  } else if (viewModel.errorMessage != null) {
+                    return SliverList(
+                      delegate: SliverChildListDelegate([
+                        Column(
+                          children: [
+                            Text(
+                              viewModel.errorMessage!,
+                              style:
+                              Theme.of(context).textTheme.titleMedium,
                             ),
-                          );
-                        } else if (viewModel.errorMessage != null) {
-                          return SliverList(
-                            delegate: SliverChildListDelegate([
-                              Column(
-                                children: [
-                                  Text(
-                                    viewModel.errorMessage!,
-                                    style:
-                                        Theme.of(context).textTheme.titleMedium,
-                                  ),
-                                  ElevatedButton(
-                                      onPressed: () {
-                                        setState(() {});
-                                      },
-                                      child: Text(
-                                        StringsManger.try_again.tr(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium,
-                                      ))
-                                ],
-                              )
-                            ]),
-                          );
-                        } else if (viewModel.articles.isEmpty) {
-                          return SliverFillRemaining(
-                            child: Center(
-                              child: Text(
-                                StringsManger.no_articles_found.tr(),
-                                style: Theme.of(context).textTheme.titleMedium,
-                              ),
-                            ),
-                          );
-                        }
-                        return SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                            (context, index) {
-                              return Padding(
-                                padding: REdgeInsets.only(
-                                    bottom: 16, right: 16, left: 16),
-                                child: ArticleItem(
-                                  article: viewModel.articles[index],
-                                ),
-                              );
-                            },
-                            childCount: viewModel.articles.length,
+                            ElevatedButton(
+                                onPressed: () {
+                                  setState(() {});
+                                },
+                                child: Text(
+                                  StringsManger.try_again.tr(),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium,
+                                ))
+                          ],
+                        )
+                      ]),
+                    );
+                  } else if (viewModel.articles.isEmpty) {
+                    return SliverFillRemaining(
+                      child: Center(
+                        child: Text(
+                          StringsManger.no_articles_found.tr(),
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ),
+                    );
+                  }
+                  return SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                        return Padding(
+                          padding: REdgeInsets.only(
+                              bottom: 16, right: 16, left: 16),
+                          child: ArticleItem(
+                            article: viewModel.articles[index],
                           ),
                         );
                       },
-                    )
+                      childCount: viewModel.articles.length,
+                    ),
+                  );
+                },
+              )
             ],
           ),
         ),
