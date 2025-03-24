@@ -10,7 +10,9 @@ import 'package:provider/provider.dart';
 
 class HomeDrawer extends StatefulWidget {
   final void Function() onHomeTap;
+
   HomeDrawer({required this.onHomeTap});
+
   @override
   State<HomeDrawer> createState() => _HomeDrawerState();
 }
@@ -19,6 +21,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
   String selectedTheme = StringsManger.theme1.tr();
 
   String selectedLang = StringsManger.language1.tr();
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -159,16 +162,17 @@ class _HomeDrawerState extends State<HomeDrawer> {
                         onChanged: (value) {
                           setState(() {
                             selectedTheme = value!;
-                            if(themeProvider.currentTheme==ThemeMode.dark){
-                              if(value==StringsManger.theme1.tr()){
+                            if (themeProvider.currentTheme == ThemeMode.dark) {
+                              if (value == StringsManger.theme1.tr()) {
                                 themeProvider.changeTheme(ThemeMode.light);
-                              }else{
+                              } else {
                                 themeProvider.changeTheme(ThemeMode.dark);
-                              };
-                            }else{
-                              if(value==StringsManger.theme2.tr()){
+                              }
+                              ;
+                            } else {
+                              if (value == StringsManger.theme2.tr()) {
                                 themeProvider.changeTheme(ThemeMode.dark);
-                              }else{
+                              } else {
                                 themeProvider.changeTheme(ThemeMode.light);
                               }
                             }
@@ -247,16 +251,16 @@ class _HomeDrawerState extends State<HomeDrawer> {
                         onChanged: (value) {
                           setState(() {
                             selectedLang = value!;
-                            if(context.locale.languageCode=="ar"){
-                              if(value==StringsManger.language1){
+                            if (context.locale.languageCode == "ar") {
+                              if (value == StringsManger.language1) {
                                 context.setLocale(Locale("en"));
-                              }else{
+                              } else {
                                 context.setLocale(Locale("ar"));
                               }
-                            }else{
-                              if(value==StringsManger.language2){
+                            } else {
+                              if (value == StringsManger.language2) {
                                 context.setLocale(Locale("ar"));
-                              }else{
+                              } else {
                                 context.setLocale(Locale("en"));
                               }
                             }

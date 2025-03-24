@@ -1,5 +1,5 @@
-import 'package:news/core/prefshelper.dart';
 import 'package:flutter/material.dart';
+import 'package:news/core/prefshelper.dart';
 
 class ThemeProvider extends ChangeNotifier {
   ThemeMode currentTheme = ThemeMode.light;

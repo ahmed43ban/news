@@ -5,8 +5,13 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/core/strings_manger.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:url_launcher/url_launcher.dart';
+
+
+import '../../../data/model/ArticlesResponse/Article.dart';
 class ArticleItem extends StatelessWidget {
-  const ArticleItem({super.key});
+  final Article article;
+  const ArticleItem({super.key,required this.article});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +30,7 @@ class ArticleItem extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8.r),
-                  child: CachedNetworkImage(imageUrl: "https://static1.srcdn.com/wordpress/wp-content/uploads/2024/10/the-gorge-poster.jpeg",
+                  child: CachedNetworkImage(imageUrl:article.urlToImage??"",
                     height: 220.h,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -33,13 +38,16 @@ class ArticleItem extends StatelessWidget {
                     errorWidget: (context, url, error) => Icon(Icons.error,size: 40.sp,),),
                 ),
                 SizedBox(height: 8,),
-                Text("A 40-year-old man has fallen approximately 200 feet to his death while canyoneering with three others at Zion National Park in Utah, authorities confirmed.\r\nThe incident occurred on Saturday when the..kkhgvhnbbjjhhhvgvcc",
+                Text(article.description??"",
                   style:Theme.of(context).textTheme.bodyMedium?.copyWith(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w500
                   ) ,maxLines: 4,overflow: TextOverflow.ellipsis,),
                 SizedBox(height: 8,),
-                ElevatedButton(onPressed: (){},
+                ElevatedButton(onPressed: ()async{
+                    await launchUrl(Uri.parse(article.url??""),mode: LaunchMode.inAppWebView);
+                   throw Exception('Could not launch ${article.url}');
+                 },
                     style: ElevatedButton.styleFrom(
                       padding: REdgeInsets.all(16),
                         backgroundColor: Theme.of(context).colorScheme.secondary),
@@ -59,7 +67,7 @@ class ArticleItem extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8.r),
-              child: CachedNetworkImage(imageUrl: "https://static1.srcdn.com/wordpress/wp-content/uploads/2024/10/the-gorge-poster.jpeg",
+              child: CachedNetworkImage(imageUrl: article.urlToImage??"",
               height: 220.h,
               width: double.infinity,
               fit: BoxFit.cover,
@@ -67,13 +75,13 @@ class ArticleItem extends StatelessWidget {
               errorWidget: (context, url, error) => Icon(Icons.error,size: 40.sp,),),
             ),
             SizedBox(height: 10.h,),
-            Text("40-year-old man falls 200 feet to his death while canyoneering at national park",
+            Text(article.title??"",
               style: Theme.of(context).textTheme.labelMedium,maxLines: 2,overflow: TextOverflow.ellipsis,),
             SizedBox(height: 10.h,),
             Row(
               children: [
                 Expanded(flex: 4,
-                  child: Text("By : DANIEL NIEMANN Associated Press, MIKE CORDER Associated Press",
+                  child: Text("By : ${article.author}",
                     style:Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: Color(0xffA0A0A0),
                       fontSize: 12.sp
@@ -81,7 +89,10 @@ class ArticleItem extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 2,
-                    child: Text(timeago.format(DateTime.now().subtract(Duration(minutes: 40))),style:Theme.of(context).textTheme.titleMedium?.copyWith(
+                    child: Text(
+                      DateTime.now().difference(DateTime.parse(article.publishedAt??"")).inDays<2
+                          ?timeago.format(DateTime.parse(article.publishedAt??""))
+                          :article.publishedAt??"",style:Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: Color(0xffA0A0A0),
                       fontSize: 12.sp
                     ),textAlign: TextAlign.end,),)
