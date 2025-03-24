@@ -6,7 +6,6 @@ import 'package:news/ui/home/screen/home_screen.dart';
 import 'package:news/ui/search/widget/search_view_model.dart';
 import 'package:provider/provider.dart';
 
-import '../../../core/compontes/EmptyNotficationsScreen.dart';
 import '../../newslist/widget/ArticleItem.dart';
 
 class SearchScreen extends StatefulWidget {
