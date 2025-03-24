@@ -1,18 +1,16 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:news/core/remote/ApiManger.dart';
 import 'package:news/data/data_source/article_data_source.dart';
 import 'package:news/data/data_source_impl/articles_api_data_source_impl.dart';
 import 'package:news/data/repo_impl/articles_repo_impl.dart';
 import 'package:news/repo/articles_repo.dart';
 import '../../../data/model/ArticlesResponse/Article.dart';
-
+@injectable
 class ArticlesListViewModel extends Cubit<ArticlesState>{
- late ArticlesRepo articlesRepo;
-  ArticlesListViewModel():super(ArticleLoadingState()){
-    ApiManger apiManger=ApiManger();
-    ArticleDataSource articleDataSource=ArticlesApiDataSourceImpl(apiManger);
-    articlesRepo=ArticlesRepoImpl(articleDataSource);
-  }
+ ArticlesRepo articlesRepo;
+ @factoryMethod
+  ArticlesListViewModel(this.articlesRepo):super(ArticleLoadingState());
 
   getArticle(String id )async{
     try{

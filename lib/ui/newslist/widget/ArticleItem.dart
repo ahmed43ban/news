@@ -44,7 +44,10 @@ class ArticleItem extends StatelessWidget {
                     fontWeight: FontWeight.w500
                   ) ,maxLines: 4,overflow: TextOverflow.ellipsis,),
                 SizedBox(height: 8,),
-                ElevatedButton(onPressed: (){},
+                ElevatedButton(onPressed: ()async{
+                    await launchUrl(Uri.parse(article.url??""),mode: LaunchMode.inAppWebView);
+                   throw Exception('Could not launch ${article.url}');
+                 },
                     style: ElevatedButton.styleFrom(
                       padding: REdgeInsets.all(16),
                         backgroundColor: Theme.of(context).colorScheme.secondary),

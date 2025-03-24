@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:news/core/di/di.dart';
 import 'package:news/ui/newslist/widget/ArticleItem.dart';
-import 'package:news/ui/newslist/widget/articles_view_model.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/strings_manger.dart';
@@ -21,7 +21,7 @@ class ArticlesList extends StatefulWidget{
 class _ArticlesListState extends State<ArticlesList> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (context) => ArticlesListViewModel()..getArticle(widget.source.id!),
+    return BlocProvider(create: (context) => getIt.get<ArticlesListViewModel>()..getArticle(widget.source.id!),
       child: BlocBuilder<ArticlesListViewModel,ArticlesState>(builder: (context, state) {
         if(state is ArticleLoadingState){
           return Center(child: CircularProgressIndicator(),);

@@ -29,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         drawer: HomeDrawer(onHomeTap: onHomeTap,),
         appBar: AppBar(
+          elevation: 0,
           title: Text(selectedCategory!=null?selectedCategory!.title:StringsManger.home.tr()),
           actions: [
             IconButton(onPressed: (){
