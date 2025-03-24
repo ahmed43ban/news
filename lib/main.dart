@@ -3,15 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news/providers/theme_provider.dart';
 import 'package:news/ui/home/screen/home_screen.dart';
+import 'package:news/ui/search/screen/search_screen.dart';
+import 'package:news/ui/search/widget/search_view_model.dart';
 import 'package:provider/provider.dart';
 
 import 'core/app_style.dart';
+import 'core/di/di.dart';
 import 'core/prefshelper.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PrefHelper.init();
   await EasyLocalization.ensureInitialized();
+  await ScreenUtil.ensureScreenSize();
+  configureDependencies();
   runApp(EasyLocalization(
       supportedLocales: [Locale("en"), Locale("ar")],
       path: 'assets/translations',
@@ -30,7 +35,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
     return ScreenUtilInit(
-      designSize:const Size(393,852),
+      designSize: const Size(393, 852),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
@@ -41,10 +46,12 @@ class MyApp extends StatelessWidget {
           title: 'News App',
           theme: AppStyle.lightTheme,
           darkTheme: AppStyle.darkTheme,
-          themeMode:  themeProvider.currentTheme,
+          themeMode: themeProvider.currentTheme,
           debugShowCheckedModeBanner: false,
           routes: {
-            HomeScreen.routeName:(_)=>HomeScreen(),
+            HomeScreen.routeName: (_) => HomeScreen(),
+            SearchScreen.routeName: (_) => ChangeNotifierProvider(
+                create: (context) => SearchViewModel(), child: SearchScreen())
           },
           initialRoute: HomeScreen.routeName,
         );
@@ -52,4 +59,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

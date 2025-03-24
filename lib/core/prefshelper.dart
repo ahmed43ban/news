@@ -22,9 +22,7 @@ class PrefHelper {
     prefs.setBool("theme", value);
   }
 
-
   static bool getTheme() {
     return prefs.getBool("theme") ?? false;
   }
-
 }
